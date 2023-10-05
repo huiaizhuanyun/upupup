@@ -66,6 +66,29 @@
 <img src="xyk.png" alt="信用卡" width="130">
     
 <script>
+window.onload = function() {
+    // 调整canvas的内部尺寸以匹配其显示尺寸
+    canvas.width = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    
+    // 初始化SignaturePad
+    const signaturePad = new SignaturePad(canvas);
+
+    document.getElementById('clear').addEventListener('click', function() {
+        signaturePad.clear();
+    });
+
+    document.getElementById('save').addEventListener('click', function() {
+        if (signaturePad.isEmpty()) {
+            alert("请签名后再保存");
+        } else {
+            const data = signaturePad.toDataURL();
+            console.log(data);  // 这里，您可以看到签名的数据URL
+            // 根据您的需要进一步处理这个数据，比如发送到服务器或保存到本地。
+        }
+    });
+}
+    
 function calculate() {
     const mileage = parseFloat(document.getElementById("mileage").value);
     const patientType = document.getElementById("patientType").value;
