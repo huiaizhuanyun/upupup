@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>欢迎使用</title>
+</head>
+<body>
+
+<h2>汇爱医疗转运服务</h2>
+<label for="mileage">输入里程(km):</label>
+<input type="number" id="mileage">
+
+<label for="patientType">选择病人状态:</label>
+<select id="patientType">
+    <option value="recovery">康复/骨科</option>
+    <option value="clear">清醒/吸氧</option>
+    <option value="coma">转运/昏迷</option>
+    <option value="critical">濒危</option>
+    <option value="respirator">呼吸机</option>
+</select>
+
+<br> <!-- 这里添加了一个换行 -->
+
+<label for="medicalStaff">是否需要医护人员:</label>
+<select id="medicalStaff">
+    <option value="0">不需要</option>
+    <option value="1">需要1位</option>
+    <option value="2">需要2位</option>
+</select>
+
+<label for="poorPatient">是否为贫困患者:</label>
+<select id="poorPatient">
+    <option value="no">否</option>
+    <option value="yes">是</option>
+</select>
+
+<button onclick="calculate()">计算费用</button>
+
+<h3>车费是: <span id="carFee">0</span> 元</h3>
+<h3>医护费是: <span id="medicalFee">0</span> 元</h3>
+<h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
+<h3>应收家属: <span id="totalFee">0</span> 元</h3>
+
+<script>
+function calculate() {
+    const mileage = parseFloat(document.getElementById("mileage").value);
+    const patientType = document.getElementById("patientType").value;
+    const medicalStaffCount = parseInt(document.getElementById("medicalStaff").value);
+    const isPoorPatient = document.getElementById("poorPatient").value === "yes";
+
+    let carCost;
+
+    // 计算车费
+    switch(patientType) {
+        case "recovery":
+            if (mileage <= 3) carCost = 500;
+            else if (mileage <= 6) carCost = 550;
+            else if (mileage <= 25) carCost = 600 + (mileage - 7) * 19;
+            else if (mileage <= 80) carCost = 970 + (mileage - 26) * 10;
+            else if (mileage <= 100) carCost = 20 * mileage;
+            else if (mileage <= 200) carCost = 19 * mileage;
+            else if (mileage <= 300) carCost = 17 * mileage;
+            else if (mileage <= 500) carCost = 15 * mileage;
+            else carCost = 14 * mileage;
+            break;
+        case "clear":
+            if (mileage <= 3) carCost = 600;
+            else if (mileage <= 6) carCost = 650;
+            else if (mileage <= 25) carCost = 700 + (mileage - 7) * 19;
+            else if (mileage <= 80) carCost = 1070 + (mileage - 26) * 10;
+            else if (mileage <= 100) carCost = 20 * mileage;
+            else if (mileage <= 200) carCost = 19 * mileage;
+            else if (mileage <= 300) carCost = 17 * mileage;
+            else if (mileage <= 500) carCost = 15 * mileage;
+            else carCost = 14 * mileage;
+            break;
+        case "coma":
+            if (mileage <= 3) carCost = 750;
+            else if (mileage <= 6) carCost = 800;
+            else if (mileage <= 25) carCost = 800 + (mileage - 7) * 19;
+            else if (mileage <= 80) carCost = 1250 + (mileage - 26) * 10;
+            else if (mileage <= 100) carCost = 23 * mileage;
+            else if (mileage <= 200) carCost = 22 * mileage;
+            else if (mileage <= 300) carCost = 20 * mileage;
+            else if (mileage <= 500) carCost = 19 * mileage;
+            else carCost = 19 * mileage;
+            break;
+        case "critical":
+            if (mileage <= 3) carCost = 850;
+            else if (mileage <= 6) carCost = 900;
+            else if (mileage <= 25) carCost = 900 + (mileage - 7) * 19;
+            else if (mileage <= 80) carCost = 1350 + (mileage - 26) * 10;
+            else if (mileage <= 100) carCost = 23 * mileage;
+            else if (mileage <= 200) carCost = 22 * mileage;
+            else if (mileage <= 300) carCost = 20 * mileage;
+            else if (mileage <= 500) carCost = 19 * mileage;
+            else carCost = 19 * mileage;
+            break;
+        case "respirator":
+            if (mileage <= 3) carCost = 1200;
+            else if (mileage <= 6) carCost = 1300;
+            else if (mileage <= 25) carCost = 1500 + (mileage - 7) * 19;
+            else if (mileage <= 80) carCost = 2050 + (mileage - 26) * 10;
+            else if (mileage <= 100) carCost = 23 * mileage + 800;
+            else if (mileage <= 200) carCost = 22 * mileage + 800;
+            else if (mileage <= 300) carCost = 20 * mileage + 1000;
+            else if (mileage <= 500) carCost = 19 * mileage + 1500;
+            else carCost = 19 * mileage + 2100;
+            break;
+    }
+
+    // 计算医护费
+    let medicalCost = 0;
+    if (mileage <= 40) {
+        medicalCost = 200 * medicalStaffCount;
+    } else if (mileage <= 100) {
+        medicalCost = 300 * medicalStaffCount;
+    } else {
+        medicalCost = 500 * medicalStaffCount;
+    }
+
+    // 计算补贴
+    const subsidy = isPoorPatient ? carCost * 0.2 : 0;
+
+    const totalCost = carCost + medicalCost - subsidy;
+
+    document.getElementById("carFee").innerText = carCost.toFixed(2);
+    document.getElementById("medicalFee").innerText = medicalCost.toFixed(2);
+    document.getElementById("subsidy").innerText = subsidy.toFixed(2);
+    document.getElementById("totalFee").innerText = totalCost.toFixed(2);
+}
+</script>
+</body>
+</html>
