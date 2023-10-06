@@ -198,6 +198,57 @@ document.getElementById('save').addEventListener('click', function() {
         // 根据您的需要进一步处理这个数据，比如发送到服务器或保存到本地。
     }
 });
+<!-- 模态窗口的按钮 -->
+<button id="showModalBtn">查看我们的服务</button>
+
+<!-- 模态窗口的内容 -->
+<div id="myModal" style="display: none; position: fixed; top: 20%; left: 25%; width: 50%; height: 60%; background-color: white; z-index: 1000; border: 1px solid black; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: auto;">
+    <h2>我们的产品和服务</h2>
+    
+    <!-- 产品1 -->
+    <div style="margin-bottom: 20px;">
+        <img src="product1-image.jpg" alt="产品1图片" width="250">
+        <p>产品1的描述或价格</p>
+    </div>
+    
+    <!-- 产品2 -->
+    <div style="margin-bottom: 20px;">
+        <img src="product2-image.jpg" alt="产品2图片" width="250">
+        <p>产品2的描述或价格</p>
+    </div>
+    
+    <!-- 产品3 -->
+    <div style="margin-bottom: 20px;">
+        <img src="product3-image.jpg" alt="产品3图片" width="250">
+        <p>产品3的描述或价格</p>
+    </div>
+
+    <button id="closeModalBtn">关闭窗口</button>
+</div>
+
+<!-- 蒙版背景 -->
+<div id="modalBackdrop" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); z-index: 999;"></div>
+
+<script>
+    const showModalBtn = document.getElementById('showModalBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const modal = document.getElementById('myModal');
+    const modalBackdrop = document.getElementById('modalBackdrop');
+
+    showModalBtn.addEventListener('click', function() {
+        modal.style.display = 'block';
+        modalBackdrop.style.display = 'block';
+    });
+
+    closeModalBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        modalBackdrop.style.display = 'none';
+    });
+
+    modalBackdrop.addEventListener('click', function() {
+        modal.style.display = 'none';
+        modalBackdrop.style.display = 'none';
+    });
 </script>
 </body>
 </html>
