@@ -53,13 +53,13 @@
 <h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
 
+<!-- 模态窗口的按钮 -->
+<button id="showModalBtn">转运服务</button>
+
 <h3>手写签名:</h3>
 <canvas id="signature-pad" width="400" height="200" style="border: 1px solid black;"></canvas>
 <button id="clear">清除签名</button>
 <button id="save">保存签名</button>
-
-<!-- 模态窗口的按钮 -->
-<button id="showModalBtn">查看我们的服务</button>
     
 <h3>支付二维码:</h3>
 <img src="jinvx.png" alt="微信" width="130">
@@ -206,24 +206,24 @@ document.getElementById('save').addEventListener('click', function() {
     
 <!-- 模态窗口的内容 -->
 <div id="myModal" style="display: none; position: fixed; top: 20%; left: 25%; width: 50%; height: 60%; background-color: white; z-index: 1000; border: 1px solid black; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: auto;">
-    <h2>我们的产品和服务</h2>
+    <h2>汇爱转运服务</h2>
     
     <!-- 产品1 -->
     <div style="margin-bottom: 20px;">
-        <img src="product1-image.jpg" alt="产品1图片" width="250">
-        <p>产品1的描述或价格</p>
+        <img src="car.jpg" alt="产品1图片" width="250">
+        <p>特种车辆，快速安全</p>
     </div>
     
     <!-- 产品2 -->
     <div style="margin-bottom: 20px;">
-        <img src="product2-image.jpg" alt="产品2图片" width="250">
-        <p>产品2的描述或价格</p>
+        <img src="yiqi.jpg" alt="产品2图片" width="250">
+        <p>进口仪器，保驾护航</p>
     </div>
     
     <!-- 产品3 -->
     <div style="margin-bottom: 20px;">
-        <img src="product3-image.jpg" alt="产品3图片" width="250">
-        <p>产品3的描述或价格</p>
+        <img src="biaozhun.jpg" alt="产品3图片" width="250">
+        <p>价格标准，依据清晰</p>
     </div>
 
     <button id="closeModalBtn">关闭窗口</button>
