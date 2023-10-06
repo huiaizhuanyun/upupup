@@ -57,6 +57,9 @@
 <canvas id="signature-pad" width="400" height="200" style="border: 1px solid black;"></canvas>
 <button id="clear">清除签名</button>
 <button id="save">保存签名</button>
+
+<!-- 模态窗口的按钮 -->
+<button id="showModalBtn">查看我们的服务</button>
     
 <h3>支付二维码:</h3>
 <img src="jinvx.png" alt="微信" width="130">
@@ -198,8 +201,6 @@ document.getElementById('save').addEventListener('click', function() {
         // 根据您的需要进一步处理这个数据，比如发送到服务器或保存到本地。
     }
 });
-<!-- 模态窗口的按钮 -->
-<button id="showModalBtn">查看我们的服务</button>
 
 <!-- 模态窗口的内容 -->
 <div id="myModal" style="display: none; position: fixed; top: 20%; left: 25%; width: 50%; height: 60%; background-color: white; z-index: 1000; border: 1px solid black; padding: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); overflow: auto;">
