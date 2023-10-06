@@ -174,7 +174,16 @@ function calculate() {
     }
 
     // 计算补贴
-    const subsidy = isPoorPatient ? carCost * 0.2 : 0;
+    let subsidy;
+    if (isPoorPatient) {
+    if (patientType === "respirator") {
+        subsidy = carCost * 0.15;
+    } else {
+        subsidy = carCost * 0.2;
+    }
+    } else {
+    subsidy = 0;
+    }
 
     const totalCost = carCost + medicalCost - subsidy;
 
