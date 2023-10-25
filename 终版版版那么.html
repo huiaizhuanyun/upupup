@@ -52,11 +52,12 @@
 <h3>医护费是: <span id="medicalFee">0</span> 元</h3>
 <h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
+<h3>收费标准: <span id="chargeStandard">未知</span></h3> <!-- 新增的元素 -->
 
 <!-- 模态窗口的按钮 -->
-<button id="showModalBtn">转运服务</button>
+<button id="showModalBtn">汇爱转运服务</button>
 
-<h3>手写签名:</h3>
+<h3>已知悉收费标准:</h3>
 <canvas id="signature-pad" width="400" height="200" style="border: 1px solid black;"></canvas>
 <button id="clear">清除签名</button>
 <button id="save">保存签名</button>
@@ -97,6 +98,18 @@ window.onload = function() {
 }
     
 function calculate() {
+     // 获取patientType的值
+    var patientType = document.getElementById("patientType").value;
+
+    // 根据patientType的值设置收费标准文本
+    if (patientType === "child") {
+        document.getElementById("feeStandard").textContent = "Child: $50";
+    } else if (patientType === "adult") {
+        document.getElementById("feeStandard").textContent = "Adult: $100";
+    } else if (patientType === "senior") {
+        document.getElementById("feeStandard").textContent = "Senior: $80";
+    }
+
     const mileage = parseFloat(document.getElementById("mileage").value);
     const patientType = document.getElementById("patientType").value;
     const medicalStaffCount = parseInt(document.getElementById("medicalStaff").value);
