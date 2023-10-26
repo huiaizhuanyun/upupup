@@ -78,6 +78,7 @@
 <img src="xyk.png" alt="信用卡" width="130">
     
 <script>
+var carCost, medicalCost, subsidy, totalCost;  // 定义全局变量
 window.onload = function() {
     // 调整canvas的内部尺寸以匹配其显示尺寸
     var canvas = document.getElementById('signature-pad');
@@ -198,7 +199,6 @@ function calculate() {
     document.getElementById("medicalFee").innerText = medicalCost.toFixed(2);
     document.getElementById("subsidy").innerText = subsidy.toFixed(2);
     document.getElementById("totalFee").innerText = totalCost.toFixed(2);
-}
 
     // 更新费用说明
     updateCostDetails(carCost, medicalCost, subsidy, totalCost); // 将值传递给函数
@@ -216,11 +216,8 @@ function updateCostDetails(carCost, medicalCost, subsidy, totalCost) {
     document.getElementById("costDetails").style.display = 'block'; // 确保详细信息是可见的
 }
 
-// calculate();
-
 // 这里开始是关于签名板的代码
 const canvas = document.getElementById('signature-pad');
-const signaturePad = new SignaturePad(canvas);
 
 document.getElementById('clear').addEventListener('click', function() {
     signaturePad.clear();
