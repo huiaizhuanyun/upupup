@@ -52,6 +52,10 @@
 <h3>医护费是: <span id="medicalFee">0</span> 元</h3>
 <h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
+<div id="costDetails" style="margin-top: 20px; padding: 10px; border: 1px solid #dedede; display: none;">
+    <h4>费用计算细节:</h4>
+    <p id="detailsText"></p>
+</div>
 
 <!-- 模态窗口的按钮 -->
 <button id="showModalBtn">汇爱转运服务</button>
@@ -192,6 +196,19 @@ function calculate() {
     document.getElementById("medicalFee").innerText = medicalCost.toFixed(2);
     document.getElementById("subsidy").innerText = subsidy.toFixed(2);
     document.getElementById("totalFee").innerText = totalCost.toFixed(2);
+}
+     // 计算完成后，将费用细节填充到新的div中
+    let detailsText = `
+        <strong>车费计算:</strong> 根据病人类型(${patientType})和行驶里程(${mileage}km)，基本车费是 ${carCost.toFixed(2)} 元。<br>
+        <strong>医护费计算:</strong> 需要医护人员${medicalStaffCount}位，医护费用是 ${medicalCost.toFixed(2)} 元。<br>
+        <strong>汇爱补贴:</strong> ${isPoorPatient ? ('由于是贫困患者，提供补贴 ' + subsidy.toFixed(2) + ' 元。') : '此次转运不满足补贴条件。'}<br>
+        <strong>总费用:</strong> 车费 + 医护费 - 汇爱补贴 = ${totalCost.toFixed(2)} 元。
+    `;
+
+    document.getElementById("detailsText").innerHTML = detailsText;
+
+    // 显示费用细节的div
+    document.getElementById("costDetails").style.display = 'block';
 }
 
 // 这里开始是关于签名板的代码
