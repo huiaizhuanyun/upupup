@@ -80,6 +80,7 @@
 <script>
 window.onload = function() {
     // 调整canvas的内部尺寸以匹配其显示尺寸
+    var canvas = document.getElementById('signature-pad');
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     
@@ -210,7 +211,7 @@ function updateCostDetails() {
     costDetails += "计算的费用是：" + carCost;
 
     // 现在，我们将这个信息放到 HTML 中
-    document.getElementById("cost-details").innerHTML = costDetails;  // 假设您有一个显示详细信息的区域
+    document.getElementById("detailsText").innerHTML = costDetails;;  // 假设您有一个显示详细信息的区域
 }
 
 // 在计算完成后调用
