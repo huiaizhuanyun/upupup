@@ -54,8 +54,8 @@
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
     
 <div id="costDetails" style="margin-top: 20px; padding: 10px; border: 1px solid #dedede; display: none;">
-    <h4>费用计算细节:</h4>
-    <p id="detailsText"></p>
+  <h4>费用计算细节:</h4>
+  <p id="detailsText"></p>
 </div>
 
 <!-- 模态窗口的按钮 -->
@@ -202,7 +202,6 @@ function calculate() {
 
     // 更新费用说明
     updateCostDetails(carCost, medicalCost, subsidy, totalCost); // 将值传递给函数
-}
 
 function updateCostDetails(carCost, medicalCost, subsidy, totalCost) {
     // 用实际的费用构建费用详细信息
