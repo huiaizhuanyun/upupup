@@ -52,6 +52,7 @@
 <h3>医护费是: <span id="medicalFee">0</span> 元</h3>
 <h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
+    
 <div id="costDetails" style="margin-top: 20px; padding: 10px; border: 1px solid #dedede; display: none;">
     <h4>费用计算细节:</h4>
     <p id="detailsText"></p>
@@ -99,6 +100,8 @@ window.onload = function() {
         }
     });
 }
+
+var carCost;  
     
 function calculate() {
 
@@ -106,8 +109,6 @@ function calculate() {
     const patientType = document.getElementById("patientType").value;
     const medicalStaffCount = parseInt(document.getElementById("medicalStaff").value);
     const isPoorPatient = document.getElementById("poorPatient").value === "yes";
-
-    let carCost;
 
     // 计算车费
     switch(patientType) {
@@ -197,6 +198,25 @@ function calculate() {
     document.getElementById("subsidy").innerText = subsidy.toFixed(2);
     document.getElementById("totalFee").innerText = totalCost.toFixed(2);
 }
+
+        // 更新费用说明
+    updateCostDetails();
+}
+
+function updateCostDetails() {
+    // 构建收费标准的详细描述
+    let costDetails = "费用是基于以下标准计算的：...";  // 描述实际的收费逻辑
+
+    // 加上实际的费用
+    costDetails += "计算的费用是：" + carCost;
+
+    // 现在，我们将这个信息放到 HTML 中
+    document.getElementById("cost-details").innerHTML = costDetails;  // 假设您有一个显示详细信息的区域
+}
+
+// 在计算完成后调用
+calculate();
+    
      // 计算完成后，将费用细节填充到新的div中
     let detailsText = `
         <strong>车费计算:</strong> 根据病人类型(${patientType})和行驶里程(${mileage}km)，基本车费是 ${carCost.toFixed(2)} 元。<br>
