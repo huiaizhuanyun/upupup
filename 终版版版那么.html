@@ -200,35 +200,24 @@ function calculate() {
     document.getElementById("totalFee").innerText = totalCost.toFixed(2);
 }
 
-        // 更新费用说明
-    updateCostDetails();
-
-function updateCostDetails() {
-    // 构建收费标准的详细描述
-    let costDetails = "费用是基于以下标准计算的：...";  // 描述实际的收费逻辑
-
-    // 加上实际的费用
-    costDetails += "计算的费用是：" + carCost;
-
-    // 现在，我们将这个信息放到 HTML 中
-    document.getElementById("detailsText").innerHTML = costDetails;;  // 假设您有一个显示详细信息的区域
+    // 更新费用说明
+    updateCostDetails(carCost, medicalCost, subsidy, totalCost); // 将值传递给函数
 }
 
-// 在计算完成后调用
-calculate();
-    
-     // 计算完成后，将费用细节填充到新的div中
+function updateCostDetails(carCost, medicalCost, subsidy, totalCost) {
+    // 用实际的费用构建费用详细信息
     let detailsText = `
-        <strong>车费计算:</strong> 根据病人类型(${patientType})和行驶里程(${mileage}km)，基本车费是 ${carCost.toFixed(2)} 元。<br>
-        <strong>医护费计算:</strong> 需要医护人员${medicalStaffCount}位，医护费用是 ${medicalCost.toFixed(2)} 元。<br>
-        <strong>汇爱补贴:</strong> ${isPoorPatient ? ('由于是贫困患者，提供补贴 ' + subsidy.toFixed(2) + ' 元。') : '此次转运不满足补贴条件。'}<br>
+        <strong>车费计算:</strong> 基本车费是 ${carCost.toFixed(2)} 元。<br>
+        <strong>医护费计算:</strong> 医护费用是 ${medicalCost.toFixed(2)} 元。<br>
+        <strong>汇爱补贴:</strong> ${subsidy > 0 ? ('提供补贴 ' + subsidy.toFixed(2) + ' 元。') : '此次转运不满足补贴条件。'}<br>
         <strong>总费用:</strong> 车费 + 医护费 - 汇爱补贴 = ${totalCost.toFixed(2)} 元。
     `;
 
     document.getElementById("detailsText").innerHTML = detailsText;
+    document.getElementById("costDetails").style.display = 'block'; // 确保详细信息是可见的
+}
 
-    // 显示费用细节的div
-    document.getElementById("costDetails").style.display = 'block';
+// calculate();
 
 // 这里开始是关于签名板的代码
 const canvas = document.getElementById('signature-pad');
