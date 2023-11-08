@@ -52,16 +52,11 @@
 <h3>医护费是: <span id="medicalFee">0</span> 元</h3>
 <h3>汇爱补贴: <span id="subsidy">0</span> 元</h3>
 <h3>应收家属: <span id="totalFee">0</span> 元</h3>
-    
-<div id="costDetails" style="margin-top: 20px; padding: 10px; border: 1px solid #dedede; display: none;">
-  <h4>费用计算细节:</h4>
-  <p id="detailsText"></p>
-</div>
 
 <!-- 模态窗口的按钮 -->
-<button id="showModalBtn">汇爱转运服务</button>
+<button id="showModalBtn">转运服务</button>
 
-<h3>已知悉收费标准:</h3>
+<h3>手写签名:</h3>
 <canvas id="signature-pad" width="400" height="200" style="border: 1px solid black;"></canvas>
 <button id="clear">清除签名</button>
 <button id="save">保存签名</button>
@@ -78,10 +73,8 @@
 <img src="xyk.png" alt="信用卡" width="130">
     
 <script>
-var carCost, medicalCost, subsidy, totalCost;  // 定义全局变量
 window.onload = function() {
     // 调整canvas的内部尺寸以匹配其显示尺寸
-    var canvas = document.getElementById('signature-pad');
     canvas.width = canvas.offsetWidth;
     canvas.height = canvas.offsetHeight;
     
@@ -102,15 +95,14 @@ window.onload = function() {
         }
     });
 }
-
-var carCost;  
     
 function calculate() {
-
     const mileage = parseFloat(document.getElementById("mileage").value);
     const patientType = document.getElementById("patientType").value;
     const medicalStaffCount = parseInt(document.getElementById("medicalStaff").value);
     const isPoorPatient = document.getElementById("poorPatient").value === "yes";
+
+    let carCost;
 
     // 计算车费
     switch(patientType) {
@@ -128,7 +120,7 @@ function calculate() {
         case "clear":
             if (mileage <= 3) carCost = 600;
             else if (mileage <= 6) carCost = 650;
-            else if (mileage <= 25) carCost = 700 + (mileage - 7) * 19;
+            else if (mileage <= 25) carCost = 650 + (mileage - 7) * 15;
             else if (mileage <= 80) carCost = 1070 + (mileage - 26) * 10;
             else if (mileage <= 100) carCost = 20 * mileage;
             else if (mileage <= 200) carCost = 19 * mileage;
@@ -137,9 +129,9 @@ function calculate() {
             else carCost = 14 * mileage;
             break;
         case "coma":
-            if (mileage <= 3) carCost = 750;
-            else if (mileage <= 6) carCost = 800;
-            else if (mileage <= 25) carCost = 800 + (mileage - 7) * 19;
+            if (mileage <= 3) carCost = 700;
+            else if (mileage <= 6) carCost = 750;
+            else if (mileage <= 25) carCost = 750 + (mileage - 7) * 19;
             else if (mileage <= 80) carCost = 1250 + (mileage - 26) * 10;
             else if (mileage <= 100) carCost = 23 * mileage;
             else if (mileage <= 200) carCost = 22 * mileage;
@@ -199,21 +191,6 @@ function calculate() {
     document.getElementById("medicalFee").innerText = medicalCost.toFixed(2);
     document.getElementById("subsidy").innerText = subsidy.toFixed(2);
     document.getElementById("totalFee").innerText = totalCost.toFixed(2);
-
-    // 更新费用说明
-    updateCostDetails(carCost, medicalCost, subsidy, totalCost); // 将值传递给函数
-
-function updateCostDetails(carCost, medicalCost, subsidy, totalCost) {
-    // 用实际的费用构建费用详细信息
-    let detailsText = `
-        <strong>车费计算:</strong> 基本车费是 ${carCost.toFixed(2)} 元。<br>
-        <strong>医护费计算:</strong> 医护费用是 ${medicalCost.toFixed(2)} 元。<br>
-        <strong>汇爱补贴:</strong> ${subsidy > 0 ? ('提供补贴 ' + subsidy.toFixed(2) + ' 元。') : '此次转运不满足补贴条件。'}<br>
-        <strong>总费用:</strong> 车费 + 医护费 - 汇爱补贴 = ${totalCost.toFixed(2)} 元。
-    `;
-
-    document.getElementById("detailsText").innerHTML = detailsText;
-    document.getElementById("costDetails").style.display = 'block'; // 确保详细信息是可见的
 }
 
 // 这里开始是关于签名板的代码
@@ -255,12 +232,12 @@ document.getElementById('save').addEventListener('click', function() {
     <!-- 产品3 -->
     <div style="margin-bottom: 20px;">
         <p>价格标准，依据清晰</p>
-        <img src="biaozhun3.png" alt="产品3图片" width="250">
+        <img src="biaozhun1.jpg" alt="产品3图片" width="250">
     </div>
 
      <!-- 产品3 -->
     <div style="margin-bottom: 20px;">
-        <img src="baiozhun4.png" alt="产品3图片" width="250">
+        <img src="biaozhun2.jpg" alt="产品3图片" width="250">
     </div>
     
     <button id="closeModalBtn">关闭窗口</button>
